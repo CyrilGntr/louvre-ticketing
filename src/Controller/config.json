@@ -1,0 +1,49 @@
+{
+    "prices": [
+        {
+            "offer": "Enfant moins de 4 ans",
+            "descr": "Tout bébé en dessous de 4 ans",
+            "prices": "0",
+            "ageMax": 4
+        },
+        {
+            "offer": "Enfant",
+            "descr": "Entre 4 et 12 ans",
+            "prices": "12",
+            "ageMax": 12
+        },
+        {
+            "offer": "Normal",
+            "descr": "Toute personne entre 12 et 60 ans",
+            "prices": "16",
+            "ageMax": 60
+        },
+        {
+            "offer": "Senior",
+            "descr": "Toute personne au dessus de 60 ans",
+            "prices": "12",
+            "ageMax": 150
+        }
+    ],
+    "disableDays": [
+        {
+            "days": [
+                2,
+                0
+            ]
+        }
+    ],
+    "disableDates": [
+        {
+            "dates": [
+                "2019, 0, 1",
+                "2019, 4, 1",
+                "2019, 4, 8",
+                "2019, 6, 14",
+                "2019, 7, 15"
+            ]
+        }
+    ],
+    "reduit": 0.5,
+    "halfday": 0.5
+}

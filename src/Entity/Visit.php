@@ -48,6 +48,7 @@ class Visit
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\GreaterThanOrEqual("today")
      */
     private $date;
 
