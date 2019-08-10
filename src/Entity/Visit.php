@@ -28,9 +28,7 @@ class Visit
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Email(
-     *     message = "L'email '{{ value }}' n'est pas valide (Pensez au @ et au .).",
      *     mode = "loose"
-     * 
      * )
      */
     private $mail;
@@ -40,15 +38,17 @@ class Visit
      * @Assert\Range(
      *      min = 1,
      *      max = 10,
-     *      minMessage = "Vous devez prendre au moins {{ limit }} ticket",
-     *      maxMessage = "Vous ne pouvez pas prendre plus de {{ limit }}tickets"
      * )
      */
     private $quantity;
 
     /**
      * @ORM\Column(type="date")
-     * @Assert\GreaterThanOrEqual("today")
+     * @Assert\GreaterThanOrEqual("today"),
+     * @Assert\LessThanOrEqual("today next year"),
+     * @Assert\NotEqualTo(
+     *  value = "tuesday"
+     * )
      */
     private $date;
 

@@ -45,6 +45,8 @@ class Clients
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\LessThanOrEqual("today"),
+     * @Assert\GreaterThanOrEqual("today - 130 years")
      */
     private $date;
 
