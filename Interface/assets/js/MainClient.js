@@ -21,7 +21,6 @@ class MainClient {
     var h3 = document.createElement('h3');
     var div = document.createElement('div');
     var para = document.createElement('p');
-    para.innerHTML += "Votre numéro de commande : " + sessionStorage.getItem('numberCommand');
     div.classList.add('content');
     div.id = 'div2';
     masterDiv.appendChild(section);
@@ -29,7 +28,6 @@ class MainClient {
     header.appendChild(h3);
     h3.innerHTML += '2 - Informations visiteurs';
     section.appendChild(div);
-    div.appendChild(para);
   }
 
   generateButton() {
@@ -37,7 +35,7 @@ class MainClient {
                 <div id="container"></div>
                 <div id="divButton">
                     <button id="addButton" onclick="mainClient.add()" class='primary'>Prochain Visiteur</button>
-                    <button style='display:none' onclick="mainClient.checkout()" id="checkout">Etape Suivante</button>
+                    <button style='display:none' onclick="mainClient.checkout()" id="checkout">Procéder au Paiement</button>
                 </div>`
   }
 
