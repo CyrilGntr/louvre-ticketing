@@ -22,7 +22,7 @@
             "offer": "Senior",
             "descr": "Toute personne au dessus de 60 ans",
             "prices": "12",
-            "ageMax": 150
+            "ageMax": 120
         }
     ],
     "disableDays": [

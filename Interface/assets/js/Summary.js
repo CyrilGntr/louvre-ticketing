@@ -1,17 +1,13 @@
-class Summary
-{
-  constructor(data)
-  {
+class Summary {
+  constructor(data) {
     this.visitors = data;
     this.generateStructure();
     this.generateSummary();
   }
 
-  calculateTotal()
-  {
+  calculateTotal() {
     var total = 0;
-    for (var i = 0; i < sessionStorage.getItem('quantity'); i++)
-    {
+    for (var i = 0; i < sessionStorage.getItem('quantity'); i++) {
       total += Number(sessionStorage.getItem(`price${i}`));
     }
     var p = document.createElement('p');
@@ -21,43 +17,9 @@ class Summary
     sessionStorage.setItem('total', total);
   }
 
-  generateButton()
-  {
 
-    var div = document.getElementById('div3');
-    div.innerHTML += `<button class='primary' id="customButton">Paiement</button>`;
 
-    var handler = StripeCheckout.configure({
-      key: 'pk_test_nzAX5TFywD7vtfGjVJ9dXNzG',
-      image: './theme/images/pic01.jpg',
-      locale: 'auto',
-      token: function (token) {
-        // You can access the token ID with `token.id`.
-        // Get the token ID to your server-side code for use.
-      }
-    });
-
-    document.getElementById('customButton').addEventListener('click', function (e) {
-      // Open Checkout with further options:
-      handler.open({
-        name: 'Musée du Louvre',
-        description: 'Billets d\'entrée pour ' + sessionStorage.getItem('quantity') + ' Visiteur(s)',
-        currency: 'eur',
-        email: document.getElementById('mail').value,
-        amount: sessionStorage.getItem('total') * 100
-      });
-
-    });
-
-    // Close Checkout on page navigation:
-    window.addEventListener('popstate', function () {
-      handler.close();
-    });
-
-  }
-
-  generateStructure()
-  {
+  generateStructure() {
     window.summary = this;
     var masterDiv = document.getElementById('wrapper');
     var section = document.createElement('section');
@@ -74,8 +36,7 @@ class Summary
     section.appendChild(div);
   }
 
-  generateSummary()
-  {
+  generateSummary() {
     // Create differents elements
     var numberCommand = document.createElement('p');
     var email = document.createElement('p');
@@ -93,13 +54,11 @@ class Summary
     //console.log(this.visitors);
     var resume = '';
     for (var i = 0; i < this.visitors.length; i++) {
-      resume += `Visiteur ${i + 1} : ${this.visitors[i].lastname} ${this.visitors[i].firstname} ${this.visitors[i].birthday} ${this.visitors[i].country} ${this.visitors[i].reduice} ${sessionStorage.getItem('price' + i)} €<br>`;
+      resume += `Visiteur ${i + 1} : ${this.visitors[i].lastname} ${this.visitors[i].firstname} ${this.visitors[i].date} ${this.visitors[i].country} ${this.visitors[i].reduice} ${sessionStorage.getItem('price' + i)} €<br>`;
     }
     var resumeDOM = document.createElement('p');
     resumeDOM.innerHTML = resume;
     div.appendChild(resumeDOM);
     this.calculateTotal();
-    this.generateButton();
-
   }
 }

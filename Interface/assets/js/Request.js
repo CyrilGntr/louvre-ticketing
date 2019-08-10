@@ -23,21 +23,21 @@ class Request {
     }
 
     getVisit(url, callback) {
-      var req = new XMLHttpRequest();
-      req.open("GET", url);
-      req.addEventListener("load", function () {
-          if (req.status >= 200 && req.status < 400) {
-              if (callback) {
-                  callback(req.responseText);
-              }
-          } else {
-              console.error(req.status + " " + req.statusText + " " + url);
-          }
-      });
-      req.addEventListener("error", function () {
-          console.error("Erreur réseau avec l'URL " + url);
-      });
-      req.send();
+        var req = new XMLHttpRequest();
+        req.open("GET", url);
+        req.addEventListener("load", function () {
+            if (req.status >= 200 && req.status < 400) {
+                if (callback) {
+                    callback(req.responseText);
+                }
+            } else {
+                console.error(req.status + " " + req.statusText + " " + url);
+            }
+        });
+        req.addEventListener("error", function () {
+            console.error("Erreur réseau avec l'URL " + url);
+        });
+        req.send();
     }
 
     sendVisit(url) {
@@ -56,11 +56,6 @@ class Request {
 
     sendClient(url, data) {
         var request = new XMLHttpRequest();
-        request.onload = function () {
-            if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-                var response = JSON.parse(this.responseText);
-            }
-        };
         request.open("POST", url);
         request.send(JSON.stringify(data));
     }
