@@ -13,6 +13,7 @@ class Request {
                     sessionStorage.setItem('config', data);
                 } catch (err) {
                     console.log(err.message + " in " + xmlhttp.responseText);
+                    alert('Nous avons rencontré une erreur veuillez recommencer');
                     return;
                 }
                 callback(data);
@@ -36,6 +37,7 @@ class Request {
         });
         req.addEventListener("error", function () {
             console.error("Erreur réseau avec l'URL " + url);
+            alert('Nous avons rencontré une erreur veuillez recommencer');
         });
         req.send();
     }
@@ -57,6 +59,10 @@ class Request {
     sendClient(url, data) {
         var request = new XMLHttpRequest();
         request.open("POST", url);
+        request.addEventListener("error", function () {
+            console.error("Erreur réseau avec l'URL " + url);
+            alert('Nous avons rencontré une erreur veuillez recommencer');
+        });
         request.send(JSON.stringify(data));
     }
 
@@ -89,8 +95,9 @@ class Request {
         var inputQuantity = document.getElementById('quantity').value;
         if (inputQuantity === undefined) { inputQuantity = 0; }
         var totalQuantity = total + inputQuantity;
-        if (totalQuantity >= 1000) {
-            alert('Trop de billets');
+        if (totalQuantity > 1000) {
+            alert('Nous vous informons que la date séléctionnée est complête veuillez choisir une autre date.');
+            document.getElementById('date').value = '';
         }
     }
 }

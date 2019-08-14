@@ -21,7 +21,8 @@ class ClientsType extends AbstractType
                 'format' => 'dd/MM/yyyy',
             ])
             ->add('country')
-            ->add('reduice');
+            ->add('reduice')
+            ->add('price');
     }
 
     public function configureOptions(OptionsResolver $resolver)

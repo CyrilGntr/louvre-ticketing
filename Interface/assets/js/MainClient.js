@@ -12,6 +12,19 @@ class MainClient {
     }
   }
 
+  // ifEmpty() {
+  //   var id = this.clients.length - 1;
+
+  //   var lastname = document.getElementById('lastname' + id).value;
+  //   var firstname = document.getElementById('firstname' + id).value;
+  //   var country = document.getElementById('country' + id).value;
+  //   var date = document.getElementById('date' + id).value;
+
+  //   if (lastname === '') { alert('Veuillez rentrez') }
+  //   else if (firstname === '') { alert('Veuillez rentrer un Prénom') }
+  //   else if (country === '') { alert('Veuillez rentrer un Pays') }
+  // }
+
   generateStructure() {
     window.mainClient = this;
     var masterDiv = document.getElementById('wrapper');
@@ -32,11 +45,11 @@ class MainClient {
 
   generateButton() {
     return `
-                <div id="container"></div>
-                <div id="divButton">
-                    <button id="addButton" onclick="mainClient.add()" class='primary'>Prochain Visiteur</button>
-                    <button style='display:none' onclick="mainClient.checkout()" id="checkout">Procéder au Paiement</button>
-                </div>`
+      <div id="container"></div>
+        <div id="divButton">
+          <button id="addButton" onclick="mainClient.add()" class='primary'>Prochain Visiteur</button>
+          <button style='display:none' onclick="mainClient.checkout()" id="checkout">Procéder au Paiement</button>
+        </div>`
   }
 
   add() {
@@ -52,9 +65,11 @@ class MainClient {
       firstname: document.getElementById('firstname' + id).value,
       country: document.getElementById('country' + id).value,
       date: document.getElementById('birthday' + id).value,
-      reduice: document.getElementById('reduice' + id).checked
+      reduice: document.getElementById('reduice' + id).checked,
+      price: sessionStorage.getItem('price' + id)
     }
     this.visitors.push(visitor);
+    // this.ifEmpty();
     req.sendClient('http://127.0.0.1:8000/api/postVisitor', visitor);
     this.clients.push(client);
   }
@@ -67,9 +82,11 @@ class MainClient {
       firstname: document.getElementById('firstname' + id).value,
       country: document.getElementById('country' + id).value,
       date: document.getElementById('birthday' + id).value,
-      reduice: document.getElementById('reduice' + id).checked
+      reduice: document.getElementById('reduice' + id).checked,
+      price: sessionStorage.getItem('price' + id)
     }
     this.visitors.push(visitor);
+    // this.ifEmpty();
     req.sendClient('http://127.0.0.1:8000/api/postVisitor', visitor);
     var summary = new Summary(this.visitors);
   }

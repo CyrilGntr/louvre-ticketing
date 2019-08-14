@@ -44,7 +44,7 @@ class Client {
                     </div>
                     <div class='field half'>
                         <input type='checkbox' id='reduice${this.id}' />
-                        <label for='reduice${this.id}' >Tarif réduit (Une preuve pourra vous être demandé)</label>
+                        <label for='reduice${this.id}' >Tarif réduit (Avec justificatif)</label>
                     </div>
                 </div>
                 <p id='price${this.id}'></p>

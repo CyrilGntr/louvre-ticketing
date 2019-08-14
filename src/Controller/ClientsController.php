@@ -49,4 +49,19 @@ class ClientsController extends FOSRestController
         }
         return $this->handleView($this->view($form->getErrors()));
     }
+
+    /**
+     * Get Visitor by command number.
+     * @Rest\Get("/visitor/{numberCommand}")
+     *
+     * @return Response
+     */
+    public function verification($numberCommand)
+    {
+        $repository = $this->getDoctrine()->getRepository(Clients::class);
+        $visit = $repository->findBy(['numberCommand' => $numberCommand]);
+        // Here calcul prix
+
+        return $visit;
+    }
 }

@@ -46,9 +46,6 @@ class Visit
      * @ORM\Column(type="date")
      * @Assert\GreaterThanOrEqual("today"),
      * @Assert\LessThanOrEqual("today next year"),
-     * @Assert\NotEqualTo(
-     *  value = "tuesday"
-     * )
      */
     private $date;
 

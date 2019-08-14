@@ -58,8 +58,8 @@ class Visit {
     }
 
     showPrices() {
-      // Get Config file
-      var config = JSON.parse(window.sessionStorage.config);
+        // Get Config file
+        var config = JSON.parse(window.sessionStorage.config);
         document.getElementById('prices').innerHTML += `
           <table>
               <thead>
@@ -73,22 +73,22 @@ class Visit {
                 <tr>
                   <td>${config.prices[0].offer}</td>
                   <td>${config.prices[0].descr}</td>
-                  <td>${config.prices[0].prices} €</td>
+                  <td>${config.prices[0].prices}&nbsp;€</td>
                 <tr/>
                 <tr>
                   <td>${config.prices[1].offer}</td>
                   <td>${config.prices[1].descr}</td>
-                  <td>${config.prices[1].prices} €</td>
+                  <td>${config.prices[1].prices}&nbsp;€</td>
                 <tr/>
                 <tr>
                   <td>${config.prices[2].offer}</td>
                   <td>${config.prices[2].descr}</td>
-                  <td>${config.prices[2].prices} €</td>
+                  <td>${config.prices[2].prices}&nbsp;€</td>
                 <tr/>
                 <tr>
                   <td>${config.prices[3].offer}</td>
                   <td>${config.prices[3].descr}</td>
-                  <td>${config.prices[3].prices} €</td>
+                  <td>${config.prices[3].prices}&nbsp;€</td>
                 <tr/>
               </tbody>
            </table>`;
@@ -119,6 +119,7 @@ class Visit {
             maxDate: new Date((year + 1) + ', ' + (month + 1) + ', ' + (day + 1)),
             minDate: new Date(year + ', ' + (month + 1) + ', ' + (day)),
             startDay: 1,
+            overlayButton: "Entrer une Date",
             customDays: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
             customMonths: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
             disabler: date => disableDays.indexOf(date.getDay()) !== -1,
@@ -130,11 +131,11 @@ class Visit {
         });
     }
 
-    tooMuchTicket(){
-      var quantity = document.getElementById('quantity')
-      quantity.addEventListener('input', function(){
-        if (quantity.value > 10) { alert('La billetterie Internet du Musée du Louvre ne permet que de commander moins de 10 tickets à la fois, vous pouvez réserver notre offre de groupe en appellant le 06 XX XX XX XX') }
-      });
+    tooMuchTicket() {
+        var quantity = document.getElementById('quantity')
+        quantity.addEventListener('input', function () {
+            if (quantity.value > 10) { alert('La billetterie Internet du Musée du Louvre ne permet que de commander moins de 10 tickets à la fois, vous pouvez réserver notre offre de groupe en appellant le 06 XX XX XX XX') }
+        });
     }
 
     setCommandNumber() {
@@ -174,10 +175,15 @@ class Visit {
         var actualDate = this.getActualDate();
         var inputDate = inputDate;
         if (actualDate == inputDate) {
-            if (actualHour >= 19) {
+            if (actualHour >= 20) {
+                alert('Le musée est fermé');
+                document.getElementById('date').value = '';
+            }
+            else if (actualHour >= 19) {
                 document.getElementById("halfday").checked = true;
                 document.getElementById("halfday").disabled = true;
                 alert('Le musée va fermer changer de jour');
+                document.getElementById('date').value = '';
             }
             else if (actualHour >= 14) {
                 document.getElementById("halfday").checked = true;

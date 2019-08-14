@@ -61,6 +61,15 @@ class Clients
      */
     private $reduice;
 
+    /**
+     * @ORM\Column(type="integer")
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 30,
+     * )
+     */
+    private $price;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -134,6 +143,18 @@ class Clients
     public function setReduice(bool $reduice): self
     {
         $this->reduice = $reduice;
+
+        return $this;
+    }
+
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
+
+    public function setPrice(int $price): self
+    {
+        $this->price = $price;
 
         return $this;
     }
