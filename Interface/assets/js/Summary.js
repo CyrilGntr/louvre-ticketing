@@ -60,5 +60,6 @@ class Summary {
     resumeDOM.innerHTML = resume;
     div.appendChild(resumeDOM);
     this.calculateTotal();
+    req.getIntent('http://127.0.0.1:8000/api/visitor/' + sessionStorage.getItem('numberCommand'));
   }
 }

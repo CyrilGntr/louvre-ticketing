@@ -66,6 +66,23 @@ class Request {
         request.send(JSON.stringify(data));
     }
 
+    getIntent(url) {
+        var request = new XMLHttpRequest();
+        request.open("GET", url);
+        request.addEventListener("load", function () {
+            var data = JSON.parse(request.response);
+            var config = JSON.parse(window.sessionStorage.config);
+            var clientSecret = data['_original_values']['client_secret'];
+            var section3 = document.getElementById('div3');
+            var stripe = new StripeComponent(clientSecret, section3, 'stripeSection', config.publicKey);
+        });
+        request.addEventListener("error", function () {
+            console.error("Erreur réseau avec l'URL " + url);
+            alert('Nous avons rencontré une erreur veuillez recommencer');
+        });
+        request.send();
+    }
+
     // CALLBACK
     saveConfig(data) {
         var json = JSON.stringify(data);

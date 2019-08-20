@@ -2,13 +2,16 @@
 
 namespace App\Controller;
 
+use ___PHPSTORM_HELPERS\object;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use App\Entity\Clients;
 use App\Form\ClientsType;
+use Stripe\Stripe;
+use Stripe\PaymentIntent;
 
 /**
  * Visitor controller.
@@ -16,19 +19,6 @@ use App\Form\ClientsType;
  */
 class ClientsController extends FOSRestController
 {
-    /**
-     * Get Visitor by command number.
-     * @Rest\Get("/visitor/{numberCommand}")
-     *
-     * @return Response
-     */
-    public function getVisitorAction($numberCommand)
-    {
-        $repository = $this->getDoctrine()->getRepository(Clients::class);
-        $visit = $repository->findBy(['numberCommand' => $numberCommand]);
-        return $this->handleView($this->view($visit));
-    }
-
     /**
      * Post Visitor.
      * @Rest\Post("/postVisitor")
@@ -58,10 +48,20 @@ class ClientsController extends FOSRestController
      */
     public function verification($numberCommand)
     {
-        $repository = $this->getDoctrine()->getRepository(Clients::class);
-        $visit = $repository->findBy(['numberCommand' => $numberCommand]);
-        // Here calcul prix
+        $conn = $this->getDoctrine()->getManager();
 
-        return $visit;
+        $sql = "SELECT SUM(price) as total FROM clients WHERE number_command = '$numberCommand'";
+        $stmt = $conn->getConnection()->prepare($sql);
+        $stmt->execute();
+
+        \Stripe\Stripe::setApiKey('sk_test_DRqsUNcODqsc3bRuBRJiXt1A');
+
+        $total = $stmt->fetch();
+        $intent = PaymentIntent::create([
+            'amount' => ($total['total'] * 100),
+            'currency' => 'eur',
+            'payment_method_types' => ['card'],
+        ]);
+        return $intent;
     }
 }
