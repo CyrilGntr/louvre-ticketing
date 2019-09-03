@@ -40,9 +40,9 @@ class StripeComponent {
             }
         ).then(function (result) {
             if (result.error) {
-                alert(result.error);
+                alert('Désolé, il y\'a eu un problème avec le paiement :(');
             } else {
-                // The payment has succeeded. Display a success message.
+                alert('Merci pour votre commande. Nous allons vous envoyer les billets par email :)');
             }
         }
         );
