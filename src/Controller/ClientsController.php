@@ -5,8 +5,8 @@ namespace App\Controller;
 use ___PHPSTORM_HELPERS\object;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use FOS\RestBundle\Controller\FOSRestController;
+use Symfony\Component\Routing\Annotation\Route;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use App\Entity\Clients;
 use App\Form\ClientsType;
@@ -18,7 +18,7 @@ use Stripe\PaymentIntent;
  * Visitor controller.
  * @Route("/api", name="api_")
  */
-class ClientsController extends FOSRestController
+class ClientsController extends AbstractFOSRestController
 {
     /**
      * Post Visitor.

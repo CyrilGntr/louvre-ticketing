@@ -4,9 +4,9 @@ namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Visit;
 use App\Form\VisitType;
 
@@ -14,7 +14,7 @@ use App\Form\VisitType;
  * Visit controller.
  * @Route("/api", name="api_")
  */
-class VisitController extends FOSRestController
+class VisitController extends AbstractFOSRestController
 {
     /**
      * Get Visit by why you want.
