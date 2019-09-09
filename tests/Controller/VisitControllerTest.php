@@ -5,12 +5,12 @@ namespace App\Tests\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class PostControllerTest extends WebTestCase
+class VisitControllerTest extends WebTestCase
 {
-    public function testShowPost()
+    public function testGetVisit()
     {
-        $client = static::createClient();
-        $client->request('GET', '/api/visitor/1o6oa0rz3umouyx');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $visit = static::createClient();
+        $visit->request('GET', '/api/visits/date=2019-08-23');
+        $this->assertEquals(200, $visit->getResponse()->getStatusCode());
     }
 }
